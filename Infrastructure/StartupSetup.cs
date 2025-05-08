@@ -2,20 +2,20 @@
 using Infrastructure.Data.Readonly;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-
 
 namespace Infrastructure;
 
+/// <summary>
+/// Add-Migration InitialCreate -Context AppDbContext -StartupProject API -Project Infrastructure
+/// Update-Database -Context AppDbContext -StartupProject API -Project Infrastructure
+/// </summary>
 public static class StartupSetup
 {
-    public static void AddDbContext(this IServiceCollection services, string connectionString) 
-        => services.AddDbContext<AppDbContext>(
-        options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
-        b => b.SchemaBehavior(MySqlSchemaBehavior.Translate,(schema,table) => $"{schema ??"dbo"}_{table}")));
+    public static IServiceCollection AddDbContext(this IServiceCollection services, string connectionString) =>
+        services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(connectionString)); // using SQL Server here
 
-    public static void AddReadonlyDbContext(this IServiceCollection services, string connectionString)
-        => services.AddDbContext<ReadonlyAppDbContext>(
-        options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
-        b => b.SchemaBehavior(MySqlSchemaBehavior.Translate, (schema, table) => $"{schema ?? "dbo"}_{table}")));
+    public static IServiceCollection AddReadonlyDbContext(this IServiceCollection services, string connectionString) =>
+        services.AddDbContext<ReadonlyAppDbContext>(options =>
+            options.UseSqlServer(connectionString)); // using SQL Server here
 }

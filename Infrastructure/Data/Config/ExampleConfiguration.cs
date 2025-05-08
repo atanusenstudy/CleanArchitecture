@@ -21,10 +21,10 @@ public class ExampleConfiguration : IEntityTypeConfiguration<Example>
         builder.Property(e => e.stProperty).HasColumnName("st_property").HasMaxLength(128).IsRequired();
         builder.Property(e => e.boProperty).HasColumnName("bo_property").IsRequired();
         builder.Property(e => e.IsDeleted).HasColumnName("is_deleted").IsRequired();
-        builder.Property(e => e.CreatedBy).HasColumnName("is_deleted").IsRequired(false);
-        builder.Property(e => e.CreatedAt).HasColumnName("is_deleted").IsRequired();
-        builder.Property(e => e.UpdatedBy).HasColumnName("is_deleted").IsRequired(false);
-        builder.Property(e => e.UpdatedAt).HasColumnName("is_deleted").IsRequired();
+        builder.Property(e => e.CreatedBy).HasColumnName("created_by").IsRequired(false);
+        builder.Property(e => e.CreatedAt).HasColumnName("created_at").IsRequired();
+        builder.Property(e => e.UpdatedBy).HasColumnName("updated_by").IsRequired(false);
+        builder.Property(e => e.UpdatedAt).HasColumnName("updated_at").IsRequired();
     }
 
     private void Seed(EntityTypeBuilder<Example> builder) => builder.HasData(
