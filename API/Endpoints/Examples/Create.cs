@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace API.Endpoints.Example;
+namespace API.Endpoints.Examples;
 
 public class Create
 {
